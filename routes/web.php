@@ -20,5 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/post', 'PostController@store')->name('savePost');
-Route::get('/postsPaginated', 'PostController@index')->name('showPostsPaginated');
+Route::post('/{id}/comment', 'PostController@storeComment')->name('saveComment');
+Route::get('/post', 'PostController@index')->name('showPostsPaginated');
 Route::get('/post/{post}', 'PostController@show')->name('showPost');
