@@ -15,7 +15,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts =  Post::latest()->paginate(10);
+//        dd($posts);
+        return view("posts.paginatedIndex", compact('posts'));
     }
 
     /**
@@ -39,7 +41,7 @@ class PostController extends Controller
 //        $validatedData = $request->validate([
         $this->validate($request,[
         	'title' => 'required|max:255',
-	        'body' => 'required'
+	        'body' => 'required|min:1'
         ]);
 
         $post = new Post;
@@ -47,6 +49,8 @@ class PostController extends Controller
         $post->body = request('body');
         $post->user_id = Auth::id();
         $post->save();
+
+        return back()->with('status', 'Post is Saved!');
 
 
     }
@@ -59,7 +63,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('posts.show', compact("post"));
     }
 
     /**

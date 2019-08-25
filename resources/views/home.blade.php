@@ -14,7 +14,8 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    You are logged in! <br>
+                    <a href="{{ route("showPostsPaginated") }}">Show All Posts</a>
                 </div>
             </div>
 
