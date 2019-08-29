@@ -100,13 +100,13 @@ class PostController extends Controller
         //
     }
 
-	public function storeComment( Request $request, $postId )
+	public function storeComment( Request $request, $Id )
 	{
-		$post = Post::findorFail($postId);
+		$post = Post::findorFail($Id);
 		$post->comments()->create([
 			'name' => $request->name,
 			'body' => $request->body,
-			'post_id' => $postId,
+			'post_id' => $Id,
 		]);
 		$post->save();
 		return back();

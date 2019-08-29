@@ -50,11 +50,15 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" id="submitBtn">
                                     {{ __('Register') }}
                                 </button>
                             </div>
                         </div>
+
+                        {{-- Hidden input element to hold post_id--}}
+
+                        <input type="hidden" id="post_id" name="post_id" value="{{ $post->id }}">
 
 
                     </form>
@@ -76,4 +80,68 @@
             </div>
         </div>
     </div>
+
+
+    <script>
+        /*$(document).ready(function () {
+            $('#submitBtn').on('click', function (e) {
+                e.preventDefault();
+                var name = ('#name').val();
+                var body = ('#body').val();
+                var post_id = ('#post_id').val();
+                //FIXME have to pass postId also
+                // var postId = ;
+                if (name != "" && body != "")
+                {
+                    $.ajax({
+                        // FIXME fix route
+                        url: "{{ route("saveComment") }}",
+                        type: "POST",
+                        data:{
+                            _token: $("#csrf").val(),
+                            name: name,
+                            body: body,
+                            post_id: post_id
+                        },
+                        cache: false,
+                        success: function (data) {
+                            alert(data.success);
+                            /!*console.log(data);
+                            var data = JSON.parse(data);
+                            if (data.statusCode == 200){
+                                // FIXME fix route
+                                winsow.location = "/";
+                            }
+                            else if(data.statusCode == 201){
+                                alert("Error Ocured !!");
+                            }*!/
+                        }
+                    });
+                }
+                else {
+                    alert('Please fill all the fields');
+                }
+            });
+        });*/
+    </script>
+
+    <script>
+        /*$(document).ready(function (e) {
+            $('#submitBtn').on('click', function () {
+               $.ajaxSetup({
+                   headers:{
+                       'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                   }
+               });
+
+               e.preventDefault();
+
+               var name = ('#name').val();
+
+
+
+            });
+        });*/
+    </script>
+
 @endsection
