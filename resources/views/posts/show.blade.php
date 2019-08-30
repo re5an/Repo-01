@@ -70,7 +70,7 @@
                 <div>
                     <h2>Comments:</h2>
 
-                    <ul>
+                    <ul id="comment">
                         @foreach($post->comments as $comment)
                             <li> {{ $comment->name }} : {{ $comment->body }}</li>
                         @endforeach
@@ -83,7 +83,7 @@
 
 
     <script>
-        /*$(document).ready(function () {
+        $(document).ready(function () {
             $('#submitBtn').on('click', function (e) {
                 e.preventDefault();
                 var name = ('#name').val();
@@ -94,8 +94,8 @@
                 if (name != "" && body != "")
                 {
                     $.ajax({
-                        // FIXME fix route
-                        url: "{{ route("saveComment") }}",
+                        url: "{{ route("saveComment", $post->id) }}",
+                        {{--url: "{{ $post->id }}/comment",--}}
                         type: "POST",
                         data:{
                             _token: $("#csrf").val(),
@@ -105,43 +105,19 @@
                         },
                         cache: false,
                         success: function (data) {
-                            alert(data.success);
-                            /!*console.log(data);
-                            var data = JSON.parse(data);
-                            if (data.statusCode == 200){
-                                // FIXME fix route
-                                winsow.location = "/";
-                            }
-                            else if(data.statusCode == 201){
-                                alert("Error Ocured !!");
-                            }*!/
-                        }
+                            var comment = '<li>' + data.name + ": " + data.body;
+                            document.getElementById("commrnt").innerHTML += comment;
+                        },
+                        fail:function (data) {
+                            
+                        } 
                     });
                 }
                 else {
                     alert('Please fill all the fields');
                 }
             });
-        });*/
-    </script>
-
-    <script>
-        /*$(document).ready(function (e) {
-            $('#submitBtn').on('click', function () {
-               $.ajaxSetup({
-                   headers:{
-                       'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-                   }
-               });
-
-               e.preventDefault();
-
-               var name = ('#name').val();
-
-
-
-            });
-        });*/
+        });
     </script>
 
 @endsection

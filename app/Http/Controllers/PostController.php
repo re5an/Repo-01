@@ -106,7 +106,8 @@ class PostController extends Controller
 		$post->comments()->create([
 			'name' => $request->name,
 			'body' => $request->body,
-			'post_id' => $Id,
+			'post_id' => $request->post_id,
+//			'post_id' => $Id,
 		]);
 		$post->save();
 		return back();
