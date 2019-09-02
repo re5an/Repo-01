@@ -74,7 +74,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('edit_post', compact('post'));
     }
 
     /**
@@ -84,9 +84,18 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id, Post $post)
     {
-        //
+        $request->validate([
+        	'title'=>'required',
+        	'body'=>'required',
+        ]);
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->user_id = $request->user_id;
+        $post->save();
+
+        return back()->with('success', 'Post is successfully updated');
     }
 
     /**
@@ -95,9 +104,11 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id, Post $post)
     {
-        //
+        $post->delete();
+        
+        return back()->with('success', 'Post is Deleted');
     }
 
 	public function storeComment( Request $request, $Id )
@@ -111,5 +122,11 @@ class PostController extends Controller
 		]);
 		$post->save();
 		return back();
+    }
+
+	public function userPosts(  ) {
+		$posts =  Post::latest()->where('user_id', Auth::id())->paginate(10);
+//        dd($posts);
+		return view("posts.user_posts", compact('posts'));
     }
 }

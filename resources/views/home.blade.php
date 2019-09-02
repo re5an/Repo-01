@@ -16,6 +16,11 @@
 
                     You are logged in! <br>
                     <a href="{{ route("showPostsPaginated") }}">Show All Posts</a>
+
+                    <div>
+                        <a href="{{ route('userPosts', ['id'=>Auth::id()]) }}">Show You'r Posts</a>
+                    </div>
+
                 </div>
             </div>
 

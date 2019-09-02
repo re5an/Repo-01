@@ -89,13 +89,10 @@
                 var name = ('#name').val();
                 var body = ('#body').val();
                 var post_id = ('#post_id').val();
-                //FIXME have to pass postId also
-                // var postId = ;
                 if (name != "" && body != "")
                 {
                     $.ajax({
                         url: "{{ route("saveComment", $post->id) }}",
-                        {{--url: "{{ $post->id }}/comment",--}}
                         type: "POST",
                         data:{
                             _token: $("#csrf").val(),
