@@ -4,6 +4,13 @@
     <div class="row">
         <div class="col-sm-12">
             <h1 class="display-3">Posts</h1>
+
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
+
             <table class="table table-striped">
                 <thead>
                 <tr>

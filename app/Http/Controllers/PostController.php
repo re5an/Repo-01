@@ -74,7 +74,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('edit_post', compact('post'));
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -84,7 +84,7 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, Post $post)
+    public function update(Request $request, Post $post)
     {
         $request->validate([
         	'title'=>'required',
@@ -92,10 +92,10 @@ class PostController extends Controller
         ]);
         $post->title = $request->title;
         $post->body = $request->body;
-        $post->user_id = $request->user_id;
+        $post->user_id = $post->user_id;
         $post->save();
 
-        return back()->with('success', 'Post is successfully updated');
+        return redirect()->route('userPosts', Auth::id())->with('status', 'Post is successfully updated');
     }
 
     /**
@@ -104,11 +104,11 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, Post $post)
+    public function destroy(Post $post)
     {
         $post->delete();
         
-        return back()->with('success', 'Post is Deleted');
+        return back()->with('status', 'Post is Deleted');
     }
 
 	public function storeComment( Request $request, $Id )

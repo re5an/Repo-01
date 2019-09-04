@@ -11,7 +11,7 @@
 
                 <div>
                     @foreach($posts as $post)
-                        <li> <a href="{{ route("showPost", ['id'=>$post->id]) }}"> {{ $post->title }} </a></li>
+                        <li> <a href="{{ route("showPost", ['id'=>$post->id]) }}"> {{ $post->title }} </a> <small> By </small>  {{ $post->user->name }}</li>
                     @endforeach
                 </div>
 

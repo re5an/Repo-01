@@ -19,12 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/post', 'PostController@store')->name('savePost');
+Route::post('/post', 'PostController@store')->name('post.store');
 Route::post('/{id}/comment', 'PostController@storeComment')->name('saveComment');
 Route::get('/post', 'PostController@index')->name('showPostsPaginated');
 Route::get('/post/{post}', 'PostController@show')->name('showPost');
 
-Route::get('/{id}/posts', 'PostController@userPosts')->name('userPosts');
-Route::get('/{id}/posts/edit', 'PostController@edit')->name('');
-Route::put('/{id}/posts/{post}', 'PostController@update')->name('post.edit');
-Route::delete('/{id}/posts/{post}', 'PostController@destroy')->name('post.delete');
+Route::get('/{id}/posts', 'PostController@userPosts')->name('userPosts')->middleware('auth');
+Route::get('/posts/edit/{post}', 'PostController@edit')->name('post.edit')->middleware('auth');
+Route::put('/posts/edit/{post}', 'PostController@update')->name('post.edit')->middleware('auth');
+Route::delete('/posts/{post}', 'PostController@destroy')->name('post.delete')->middleware('auth');
