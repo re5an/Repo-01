@@ -8,7 +8,7 @@ class Comment extends Model
 {
 	protected $guarded = [];
 	protected $fillable = [
-		'name', 'body' , 'post_id'
+		'name', 'body'
 	];
 
     public  function  post()
